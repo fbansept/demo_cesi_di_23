@@ -1,11 +1,12 @@
 INSERT INTO family (name) values ('rosé'),('blanc'),('rouge'),('pétillant');
 
-INSERT INTO role (name) values ('admin'),('fournisseur'),('client');
+INSERT INTO role (name) values ('admin'),('fournisseur'),('client'),('gestionnaire');
 
 INSERT INTO user (login, role_id) values
 ('admin',1),
 ('fournisseur 1',2),
-('fournisseur 2',2);
+('fournisseur 2',2),
+('franck',4);
 
 INSERT INTO product (name, quantity, supplier_id) values
 ('champagne cave 1',50,1),
