@@ -41,8 +41,15 @@ public class ProductController {
 
         if(productOptional.isPresent()) {
             Product product = productOptional.get();
-            product.setQuantity(product.getQuantity() + quantity);
-            productDao.save(product);
+
+            //si la quantité à modifier est positive
+            // ou si la quantité à supprimer est inférieur au stock
+            //(cad qu'il y est assez de stock à supprimer)
+            if(quantity > 0 || product.getQuantity() > -quantity) {
+
+                product.setQuantity(product.getQuantity() + quantity);
+                productDao.save(product);
+            }
         }
     }
 }
