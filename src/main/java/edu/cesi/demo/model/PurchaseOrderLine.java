@@ -1,5 +1,6 @@
 package edu.cesi.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,7 @@ public class PurchaseOrderLine {
     private int quantity;
 
     @ManyToOne
+    @JsonIgnore
     private PurchaseOrder order;
 
     @ManyToOne

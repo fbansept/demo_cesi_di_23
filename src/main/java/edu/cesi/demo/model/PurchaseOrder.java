@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,4 +21,7 @@ public class PurchaseOrder {
 
     @ManyToOne
     private User user;
+
+    @OneToMany(mappedBy = "order")
+    private List<PurchaseOrderLine> lines;
 }
