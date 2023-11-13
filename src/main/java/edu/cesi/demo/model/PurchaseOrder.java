@@ -4,19 +4,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
-public class User {
+public class PurchaseOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String login;
+
+    private LocalDateTime date;
+
+    private String status;
 
     @ManyToOne
-    private Role role;
-
+    private User user;
 }
