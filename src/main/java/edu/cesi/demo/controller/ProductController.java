@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 public class ProductController {
 
@@ -34,7 +35,7 @@ public class ProductController {
         return listProduct;
     }
 
-    @DeleteMapping("/product/{id}")
+    @DeleteMapping("/admin/product/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable int id){
 
         Optional<Product> productOptional = productDao.findById(id);
@@ -48,7 +49,7 @@ public class ProductController {
         return new ResponseEntity<>(productOptional.get(),HttpStatus.OK);
     }
 
-    @PostMapping("/product")
+    @PostMapping("/admin/product")
     public ResponseEntity<Product> editProduct(@RequestBody Product product) {
 
         //Si c'est une mise à jour (update)
@@ -73,7 +74,7 @@ public class ProductController {
 
     }
 
-    @PostMapping("/change-stock/{idProduct}/{quantity}")
+    @PostMapping("/manager/change-stock/{idProduct}/{quantity}")
     public ResponseEntity<Product> changeStock(@PathVariable int idProduct, @PathVariable int quantity) {
         Optional<Product> productOptional = productDao.findById(idProduct);
 

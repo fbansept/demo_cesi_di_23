@@ -2,7 +2,13 @@ package edu.cesi.demo.controller;
 
 import edu.cesi.demo.dao.UserDao;
 import edu.cesi.demo.model.User;
+import edu.cesi.demo.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,6 +21,9 @@ public class UserController {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @GetMapping("/user/{id}")
     public User getUser(@PathVariable int id){
@@ -35,5 +44,27 @@ public class UserController {
     @PostMapping("/user")
     public void editUser(@RequestBody User user) {
         userDao.save(user);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody User user){
+
+        try {
+
+            MyUserDetails userDetails = (MyUserDetails) authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            user.getLogin(),
+                            user.getPassword()
+                    )
+            ).getPrincipal();
+
+            //TODO : retourner le JWT correspondant à la personne qui tente de se connecter
+
+            return new ResponseEntity<>("le JWT", HttpStatus.OK);
+
+        } catch (Exception e) {
+            //le login ou le mot de passe est erroné
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
     }
 }
