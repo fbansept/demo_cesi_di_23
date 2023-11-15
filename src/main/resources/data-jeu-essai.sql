@@ -3,10 +3,10 @@ INSERT INTO family (name) values ('rosé'),('blanc'),('rouge'),('pétillant');
 INSERT INTO role (name) values ('admin'),('fournisseur'),('client'),('gestionnaire');
 
 INSERT INTO user (login, password ,role_id) values
-('admin','root',1),
-('fournisseur 1','root',2),
-('fournisseur 2','root',2),
-('franck','root',4);
+('admin','$2a$10$XDSyiRYscMt3yL1FN8h64uzqQEQlvNtAISd7c/MFfKTfGA8vHkCK2',1),
+('fournisseur 1','$2a$10$XDSyiRYscMt3yL1FN8h64uzqQEQlvNtAISd7c/MFfKTfGA8vHkCK2',2),
+('fournisseur 2','$2a$10$XDSyiRYscMt3yL1FN8h64uzqQEQlvNtAISd7c/MFfKTfGA8vHkCK2',2),
+('franck','$2a$10$XDSyiRYscMt3yL1FN8h64uzqQEQlvNtAISd7c/MFfKTfGA8vHkCK2',4);
 
 INSERT INTO product (name, quantity, supplier_id) values
 ('champagne cave 1',50,1),
