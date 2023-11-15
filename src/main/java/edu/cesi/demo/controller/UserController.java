@@ -2,6 +2,7 @@ package edu.cesi.demo.controller;
 
 import edu.cesi.demo.dao.UserDao;
 import edu.cesi.demo.model.User;
+import edu.cesi.demo.security.JwtUtils;
 import edu.cesi.demo.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,9 @@ public class UserController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtUtils jwtUtils;
 
     @GetMapping("/user/{id}")
     public User getUser(@PathVariable int id){
@@ -58,9 +62,7 @@ public class UserController {
                     )
             ).getPrincipal();
 
-            //TODO : retourner le JWT correspondant à la personne qui tente de se connecter
-
-            return new ResponseEntity<>("le JWT", HttpStatus.OK);
+            return new ResponseEntity<>(jwtUtils.generateJwt(userDetails), HttpStatus.OK);
 
         } catch (Exception e) {
             //le login ou le mot de passe est erroné
